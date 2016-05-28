@@ -1,9 +1,10 @@
 distancia,unidad
-29.96,cm,""
-29.97,cm,""
-29.59,cm,""
-29.47,cm,""
-30.08,cm,""
-"",x (promedio): ,29.814
-"",σ (desv. estándar),0.2387132170618124
-"",Ea (E. aleatorio),0.3580698255927186
+sensor pronto,cm,""
+15.95,cm,""
+15.96,cm,""
+15.95,cm,""
+"",x (promedio): ,11.965
+"",Ei (E. instrumento),0.7
+"",σ (desv. estándar),6.907997177185295
+"",Ea (E. aleatorio),11.965002089427315
+"",Δx (E. absoluto),11.985460984042293
