@@ -53,26 +53,39 @@ CSV.open("file.csv", "wb") do |csv|
 
       }
 
-      def sum
-        sum = @measures.inject{ |sum, el| sum + el }.to_f
+      def sum(xi)
+        sum = xi.inject{ |sum, el| sum + el }.to_f
         return sum
       end
 
-      def average_calculation
-        @avg = sum / @measures.size
-        puts "average: #{@avg}"
-        return @avg
+      def average_calculation(measures)
+        avg = sum(measures) / measures.size
+        return avg
       end
 
-      def standard_deviation_calculation
-        
+      def standard_deviation_calculation(measures, avg)
+        internal_sigma = []
+        measures.each do |xi|
+          internal_sigma << ((avg - xi).abs)**2
+          sigma = sum(internal_sigma)
+          @sd = Math.sqrt(sigma/measures.size)
+        end
+        return @sd
+      end
+
+      def random_error(n, sd)
+        re = (3 * sd)/Math.sqrt(n-1)
+        return re
       end
 
 
       ws.onclose {
         puts "Conexión cerrada por el cliente"
         puts "measures_array: #{@measures.inspect}"
-        csv << ["", "PROMEDIO: ", "#{average_calculation}"]
+        csv << ["", "x (promedio): ", "#{average_calculation(@measures)}"]
+        csv << ["", "σ (desv. estándar)", "#{standard_deviation_calculation(@measures, average_calculation(@measures))}"]
+        csv << ["", "Ea (E. aleatorio)", "#{random_error(@measures.size, standard_deviation_calculation(@measures, average_calculation(@measures)))}"]
+
       }
 
       ws.onerror { |e|
