@@ -15,7 +15,7 @@ stop_bits = 1
 parity = SerialPort::NONE
 @sp = SerialPort.new(port_str, baud_rate, data_bits, stop_bits, parity)
 @measures = []
-ei = 0.7
+EI = 0.7
 print "Conectando...\n"
 sleep 3
 print "¡Conectado a Arduino!\n"
@@ -80,7 +80,7 @@ CSV.open("file.csv", "wb") do |csv|
       end
 
       def abs_error(ei, re)
-        abs_e = Math.sqrt(ei**2 + re**2)
+        abs_e = Math.sqrt(EI**2 + re**2)
         return abs_e
       end
 
@@ -89,10 +89,10 @@ CSV.open("file.csv", "wb") do |csv|
         puts "Conexión cerrada por el cliente"
         puts "measures_array: #{@measures.inspect}"
         csv << ["", "x (promedio): ", "#{average_calculation(@measures)}"]
-        csv << ["", "Ei (E. instrumento)", "#{ei}"]
+        csv << ["", "Ei (E. instrumento)", "#{EI}"]
         csv << ["", "σ (desv. estándar)", "#{standard_deviation_calculation(@measures, average_calculation(@measures))}"]
         csv << ["", "Ea (E. aleatorio)", "#{random_error(@measures.size, standard_deviation_calculation(@measures, average_calculation(@measures)))}"]
-        csv << ["", "Δx (E. absoluto)", "#{abs_error(ei, random_error(@measures.size, standard_deviation_calculation(@measures, average_calculation(@measures))))}"]
+        csv << ["", "Δx (E. absoluto)", "#{abs_error(EI, random_error(@measures.size, standard_deviation_calculation(@measures, average_calculation(@measures))))}"]
 
       }
 
