@@ -14,7 +14,7 @@ data_bits = 8
 stop_bits = 1
 parity = SerialPort::NONE
 @sp = SerialPort.new(port_str, baud_rate, data_bits, stop_bits, parity)
-@sum = []
+@measures = []
 print "Conectando...\n"
 sleep 3
 print "¡Conectado a Arduino!\n"
@@ -48,21 +48,30 @@ CSV.open("file.csv", "wb") do |csv|
         end
 
         csv << ["#{measure.chomp}", "cm", ""]
-        @sum << measure.chomp.to_f
+        @measures << measure.chomp.to_f
         puts "measures: #{measure}"
 
       }
 
+      def sum
+        sum = @measures.inject{ |sum, el| sum + el }.to_f
+        return sum
+      end
+
       def average_calculation
-        @avg = @sum.inject{ |sum, el| sum + el }.to_f / @sum.size
+        @avg = sum / @measures.size
         puts "average: #{@avg}"
         return @avg
+      end
+
+      def standard_deviation_calculation
+        
       end
 
 
       ws.onclose {
         puts "Conexión cerrada por el cliente"
-        puts "measures_array: #{@sum.inspect}"
+        puts "measures_array: #{@measures.inspect}"
         csv << ["", "PROMEDIO: ", "#{average_calculation}"]
       }
 
