@@ -3,20 +3,35 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
-/* 
+/*
     Created on : 31/03/2016, 21:36:58
     Author     : wender
 */
 
+body {
+  font-family: roboto;
+  text-align: center;
+}
+h1 {
+  color: olive;
+}
+
 .icons{
-    font-size: 100px;    
+    font-size: 100px;
     width: 100%;
     text-align: center;
     margin: 80px 0 0 0 ;
     cursor: pointer;
 }
 
-.vg-on{    
+.vg-on{
     color: #0093dd;
     font-size: 115px;
+}
+
+.graphic {
+  margin-left: 5em;
+}
+.strong {
+  font-weight: bold;
 }
